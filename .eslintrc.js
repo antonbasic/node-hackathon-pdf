@@ -9,10 +9,10 @@ module.exports = {
   },
   rules: {
     'comma-dangle': ["error", "always-multiline"],
+    "space-before-function-paren": ["error", "always"],
     indent: ["error", 2, {
       flatTernaryExpressions: true,
       SwitchCase: 1,
     }],
   },
 }
-  

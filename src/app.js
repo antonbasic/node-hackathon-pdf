@@ -20,9 +20,22 @@ app.post('/pdf', async (req, res) => {
   })
 })
 
-app.get('/pdf/:key', (req, res) => {
+app.get('/pdf/:key', (req, res, next) => {
   res.set('Content-Type', 'application/pdf')
-  res.send(db.get(req.params.key))
+  const toReturn = db.get(req.params.key)
+  if (toReturn === undefined) {
+    const error = new Error(`Document for key ${req.params.key} is not found`)
+    error.status = 404
+    return next(error)
+  }
+  res.send()
+})
+
+app.use((err, req, res, next) => {
+  if (!err.status) {
+    return res.status(500).send(err.message)
+  }
+  return res.status(err.status).send(err.message)
 })
 
 module.exports = app

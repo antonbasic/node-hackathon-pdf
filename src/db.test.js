@@ -8,20 +8,27 @@ describe('the db', () => {
     })
 
     test('that the factory functions returns an object', () => {
+        // given
         const dbFactory = require('./db')
 
+        // when
         const returned = dbFactory()
 
+        // then
         expect(returned).toMatchObject({})
     })
 
     it('has store and get methods', () => {
+        // given
         const desiredDb = {
             store: expect.any(Function),
             get: expect.any(Function)
         }
+
+        // when
         const db = dbFactory()
 
+        // then
         expect(db).toMatchObject(desiredDb)
     })
 
@@ -39,10 +46,15 @@ describe('the db', () => {
     })
     
     it('it returns undefined if key does not exists in db', () => {
+        // given
         const db = dbFactory()
         const id = uuid()
+
+        // when
+        const noMatchResult = db.get(id)
         
-        expect(db.get(id)).toBeUndefined()
+        // then
+        expect(noMatchResult).toBeUndefined()
     })
 
     it('can store and retrieve multiple values', () => {

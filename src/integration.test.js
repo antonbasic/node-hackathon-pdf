@@ -1,19 +1,57 @@
 const request = require('supertest')
 const app = require('./app')
 
-describe('GET /pdf', () => {
-  it('responds with json and key', async () => {
+describe('POST /pdf', () => {
+  it('takes a url in body and returns a key', async () => {
+    // given
+    const urlToPDFify = 'https://google.com'
+
+    // when
     const post = await request(app)
       .post('/pdf')
-      .send({ url: 'https://google.com' })
+      .send({ url: urlToPDFify })
 
-    expect(post.get('Content-Type')).toMatch(/json/)
+    // then
     expect(post.status).toBe(201)
-    expect(post.body.key).toBeTruthy()
+    expect(post.get('Content-Type')).toMatch(/json/)
+    expect(post.body).toMatchObject({ key: expect.any(String) })
+  })
 
-    const get = await request(app).get(`/pdf/${post.body.key}`)
+  // TODO: add test for malformed urls
 
-    expect(get.get('Content-Type')).toMatch(/application\/pdf/)
-    expect(get.status).toBe(200)
+  // TODO: add test for urls not going anywhere e.g. www.gooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooogle.com
+
+  // TODO: add even more tests
+})
+
+describe('GET /pdf/:key', () => {
+  it('takes a url in body and returns a key', async () => {
+    // given
+    const urlToPDFify = 'https://google.com'
+    const { body: { key } } = await request(app)
+      .post('/pdf')
+      .send({ url: urlToPDFify })
+
+    // when
+    const getPdfResponse = await request(app)
+      .get(`/pdf/${key}`)
+      .send()
+
+    // then
+    expect(getPdfResponse.status).toBe(200)
+    expect(getPdfResponse.get('Content-Type')).toMatch(/application\/pdf/)
+  })
+
+  it('returns 404 for unknown key', async () => {
+    // given
+    const key = 'unusedKey'
+
+    // when
+    const getPdfResponse = await request(app)
+      .get(`/pdf/${key}`)
+      .send()
+
+    // then
+    expect(getPdfResponse.status).toBe(404)
   })
 })

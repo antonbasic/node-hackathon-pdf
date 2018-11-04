@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "mkdir -p dist && node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "nodemon": "^1.18.5"
+    "nodemon": "^1.18.5",
+    "showdown": "^1.8.7"
   }
 }

@@ -1,5 +1,5 @@
 # Uppgiften
-Vi ska enligt TDD, bygga ett JSON över http api där man kan beställa en pdf av en webbsida och kunna hämta hem pdf:en vid senare tillfällen. Till vår hjälp har vi en bunt färdiga tester som behöver uppfyllas. APIet exponerar följande endpoints
+Vi ska enligt TDD bygga ett JSON över http api där man kan beställa en pdf av en webbsida och kunna hämta hem pdf:en vid senare tillfällen. Till vår hjälp har vi en bunt färdiga tester som behöver uppfyllas. APIet innehåller följande endpoints
 *   `POST /pdf`
 
     Request body
@@ -19,6 +19,16 @@ Vi ska enligt TDD, bygga ett JSON över http api där man kan beställa en pdf a
     Response `Content-Type: application/pdf`
 
     Response triggar nedladdning av pdf
+
+Vi ska även bygga en egen in-memory databas med endast två enkla funktioner, `get` och `store`.
+
+Tyngdpunkten kommer att ligga på att få något som fungerar och byggt på ett javascriptigt sätt. 
+
+Lästips:
+*   [Express api documentation][express-api-doc]
+*   [MDN javascript docs][mdn-javascript]
+*   [NodeJS api][nodejs-api]
+*   [Closures i javascript MDN][closures]
 
 ## Sätta upp projektet
 1.  Klona gitprojektet från [Github][gitrepo]
@@ -133,3 +143,7 @@ npm install \
 
 [standardjs]: https://standardjs.com
 [gitrepo]: https://www.github.com
+[express-api-doc]: https://expressjs.com/en/4x/api.html
+[mdn-javascript]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
+[nodejs-api]: https://nodejs.org/dist/latest-v11.x/docs/api/
+[closures]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures#Closure
